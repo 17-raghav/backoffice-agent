@@ -1,0 +1,57 @@
+# Dataset B — what the work is (Step 2)
+
+704 cases in 15 sessions, 168.5 case-minutes. 4 distinct Windows users. Timings are from a compressed test environment — relative only.
+
+## Volume and time
+
+| type | process | dept | cases | case_share | total_min | time_share | median_case_s | median_handle_s | users | sessions |
+|---|---|---|---|---|---|---|---|---|---|---|
+| P6 | 請求書照合・承認 | Finance | 76 | 0.108 | 23.5 | 0.139 | 15.8 | 8.5 | 4 | 9 |
+| P12 | 契約管理 | Logistics | 60 | 0.085 | 19.6 | 0.116 | 19.8 | 8.3 | 4 | 8 |
+| P3 | 入社手続き照合 | HR | 62 | 0.088 | 19.5 | 0.116 | 17.0 | 8.5 | 4 | 9 |
+| P1 | 経費精算確認 | HR | 82 | 0.116 | 17.1 | 0.101 | 11.3 | 4.6 | 3 | 8 |
+| P10 | 発注管理（発注書登録） | Finance | 80 | 0.114 | 14.9 | 0.089 | 10.5 | 4.6 | 4 | 9 |
+| P11 | 在庫調整登録 | Logistics | 66 | 0.094 | 13.0 | 0.077 | 10.5 | 4.5 | 4 | 9 |
+| P2 | 勤怠・休暇申請確認 | HR | 70 | 0.099 | 11.6 | 0.069 | 9.2 | 4.4 | 3 | 7 |
+| P7 | 支払処理 | Finance | 37 | 0.053 | 10.8 | 0.064 | 20.3 | 4.5 | 3 | 5 |
+| P9 | 経費承認（管理職） | Finance | 32 | 0.045 | 9.4 | 0.056 | 19.3 | 4.6 | 2 | 4 |
+| P4 | 給与変更登録 | HR | 48 | 0.068 | 8.8 | 0.052 | 9.8 | 4.5 | 3 | 6 |
+| P13 | IT申請処理 | Logistics | 40 | 0.057 | 8.3 | 0.049 | 10.8 | 4.6 | 4 | 5 |
+| P5 | 福利厚生申請処理 | HR | 36 | 0.051 | 7.4 | 0.044 | 12.8 | 4.8 | 3 | 4 |
+| P8 | 予算差異分析 | Finance | 15 | 0.021 | 4.6 | 0.027 | 21.0 | 4.5 | 2 | 2 |
+
+## Handling patterns
+
+| type | clicks_per_case | keys_per_case | switches_per_case | doc_lookup_rate | distinct_docs | top_docs | excel_logging_rate | memo_logging_rate | exception_rate | distinct_note_templates | outcomes |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| P6 | 3.1 | 14.6 | 2.8 | 0.7 | 10 | getsujitsu_teigaku_torihikisaki_ichiran, expense_calc, shinkui_keiyaku_tetsuzuki | 0.17 | 0.01 | 0.42 | 2 | 差異なし承認×15; 差異あり要確認×11 |
+| P12 | 3.1 | 14 | 4.8 | 0.92 | 9 | shinkui_keiyaku_tetsuzuki, keiyaku_kaijo_tetsuzuki, shinkuitorihikisaki_touroku_tetsuzuki | 0.03 | 0.0 | 0.0 | 1 | 関連書類確認済み×21 |
+| P3 | 3.0 | 14.3 | 4.3 | 0.77 | 8 | nyusha_checklist_shinsotsu_batch, gyomu_itaku_ukeire_tetsuzuki, shinkuitorihikisaki_touroku_tetsuzuki | 0.03 | 0.0 | 0.0 | 1 | 照合項目すべて確認済み×22 |
+| P1 | 3.0 | 7.9 | 1.2 | 0.16 | 4 | gyomu_itaku_keihi_kitei, kanrisya_kengen_shinsei_tetsuzuki, gyomu_itaku_ukeire_tetsuzuki | 0.0 | 0.18 | 0.0 | 1 | 規程内であることを確認した×38 |
+| P10 | 3.0 | 5.0 | 0.9 | 0.24 | 5 | shinkuitorihikisaki_touroku_tetsuzuki, shinkui_keiyaku_tetsuzuki, getsujitsu_teigaku_torihikisaki_ichiran | 0.0 | 0.0 | 0.12 | 1 | 発注書確認・登録完了×26 |
+| P11 | 3.1 | 9.9 | 1.1 | 0.02 | 1 | expense_calc | 0.02 | 0.24 | 0.0 | 12 | 品番：BATCH-W2 品名：電源モジュールB 調整数：×1; 品番：BATCH-W1 品名：制御基板ユニットA 調整数×1; 品番：BATCH-W6 品名：モーターユニットF 調整数×1 |
+| P2 | 3.0 | 4.7 | 0.3 | 0.01 | 1 | shinkui_keiyaku_tetsuzuki | 0.0 | 0.0 | 0.0 | 1 | 問題なし承認×23 |
+| P7 | 3.1 | 16.0 | 3.5 | 0.73 | 6 | gyomu_itaku_kyuuyo_kitei, gyomu_itaku_ukeire_tetsuzuki, shinkui_keiyaku_tetsuzuki | 0.0 | 0.0 | 0.0 | 1 | 完了×21 |
+| P9 | 3 | 13.0 | 4.0 | 0.81 | 5 | gyomu_itaku_keihi_kitei, settai_keihi_kitei, nyusha_checklist_shinsotsu_batch | 0.0 | 0.0 | 0.0 | 1 | 規程確認のうえ承認×10 |
+| P4 | 3 | 6.8 | 0.5 | 0.12 | 3 | kazoku_teate_kitei, getsujitsu_teigaku_torihikisaki_ichiran, gyomu_itaku_ukeire_tetsuzuki | 0.0 | 0.0 | 0.0 | 1 | 確認完了×16 |
+| P13 | 3.0 | 8.8 | 1.4 | 0.17 | 5 | kanrisya_kengen_shinsei_tetsuzuki, getsujitsu_teigaku_torihikisaki_ichiran, gyomu_itaku_keihi_kitei | 0.0 | 0.23 | 0.0 | 1 | 情報システム部へ転送済み×21 |
+| P5 | 2.9 | 5.5 | 1.8 | 0.5 | 8 | ikuji_kyuugyou_kitei, kazoku_teate_kitei, kaigo_kyuugyou_kitei | 0.0 | 0.0 | 0.0 | 4 | 対象：産休中社保免除申請×4; 対象：育児休業期間中社保免除×4; 対象：住居変更に伴う手当改定×3 |
+| P8 | 3.1 | 52.4 | 2.1 | 0.4 | 1 | budget_analysis | 0.4 | 0.0 | 0.0 | 1 | 是正対応方針を記録×5 |
+
+## People
+
+{
+ "machines_users": 4,
+ "sessions": 15,
+ "sessions_per_user": {
+  "sha256:c70cd83c6c76a7ff": 2,
+  "sha256:a923851a89cbde9a": 3,
+  "sha256:833b46e4bddf9c19": 5,
+  "sha256:5366a159add2c670": 5
+ },
+ "portal_accounts_seen_by_users": {
+  "佐藤 直樹 · 経理マネージャー": 4,
+  "田中 麻里 · 人事マネージャー": 4,
+  "高橋 健司 · 物流マネージャー": 4
+ }
+}

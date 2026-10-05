@@ -1,0 +1,68 @@
+{
+ "nav": {
+  "p10": 853,
+  "p25": 1017,
+  "median": 1573,
+  "p75": 1740,
+  "p90": 1841,
+  "n": 1189
+ },
+ "open_same": {
+  "p10": 2816,
+  "p25": 3083,
+  "median": 3438,
+  "p75": 3675,
+  "p90": 3903,
+  "n": 226
+ },
+ "open_change": {
+  "p10": 4443,
+  "p25": 4716,
+  "median": 5155,
+  "p75": 5428,
+  "p90": 5592,
+  "n": 335
+ },
+ "tail": {
+  "p10": 2740,
+  "p25": 2987,
+  "median": 3275,
+  "p75": 3732,
+  "p90": 29736,
+  "n": 1606
+ },
+ "final_after_dashboard_nav": {
+  "p10": 7790,
+  "p25": 8120,
+  "median": 8447,
+  "p75": 8665,
+  "p90": 8933,
+  "n": 55
+ },
+ "final_after_last_commit": {
+  "p10": 10641,
+  "p25": 11043,
+  "median": 11478,
+  "p75": 18793,
+  "p90": 33813,
+  "n": 55
+ },
+ "nav_to_open": {
+  "p10": 2170,
+  "p25": 2653,
+  "median": 3049,
+  "p75": 3607,
+  "p90": 3833,
+  "n": 1189
+ },
+ "config_in_use": {
+  "_source": "calibrated on dataset A ground truth by scripts/02_calibrate_a.py (medians)",
+  "nav": 1573,
+  "open_same": 3438,
+  "open_change": 5155,
+  "tail": 3275,
+  "nav_max_before_open": 6000,
+  "final_after_dashboard_nav": 8447,
+  "final_after_last_commit": 11478
+ }
+}

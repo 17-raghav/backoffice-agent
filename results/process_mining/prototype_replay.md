@@ -1,0 +1,31 @@
+# Prototype replay on real dataset-B cases
+
+Each case's list row (as captured on screen) is fed to the assistant; the drafted note is compared with the note the worker actually submitted (where the agent captured it).
+
+| type | status | cases | row parsed | human note visible | note exact match | P6 decisions agree | approve | hold | human |
+|---|---|---|---|---|---|---|---|---|---|
+| P1 | draft-only | 82 | 70 | 34 | 33/34 |  | 0 | 0 | 70 |
+| P2 | draft-only | 70 | 51 | 15 | 14/15 |  | 0 | 0 | 51 |
+| P3 | deferred | 62 | | | | | | | |
+| P4 | deferred | 48 | | | | | | | |
+| P5 | deferred | 36 | | | | | | | |
+| P6 | full | 76 | 74 | 25 | 25/25 | 25/25 | 48 | 26 | 0 |
+| P7 | deferred | 37 | | | | | | | |
+| P8 | draft-only | 15 | 12 | 5 | 5/5 |  | 0 | 0 | 12 |
+| P9 | deferred | 32 | | | | | | | |
+| P10 | deferred | 80 | | | | | | | |
+| P11 | deferred | 66 | | | | | | | |
+| P12 | draft-only | 60 | 43 | 11 | 11/11 |  | 0 | 0 | 43 |
+| P13 | draft-only | 40 | 36 | 20 | 20/20 |  | 0 | 0 | 36 |
+
+P6 cases the practised rule approves but the written procedure (fixed-amount list, ±10%) cannot confirm: 25 of 48 approvals
+
+- 関西物流サービス: 9
+- 福岡システム設計: 7
+- 北陸部品工業株式会社: 7
+- 沖縄物流センター: 2
+
+Note mismatches (first 10):
+
+- P1 P1-07048822-007: draft `経費精算確認済み。費目：研修費 金額：49,097円。規程内であることを確認した。` vs human `経費精算確認済み。費目：研修費 金額：49,008円。規程内であることを確認した。`
+- P2 P2-07046495-010: draft `勤怠申請確認。種別：特別休暇（慶弔）。取得日：2026-07-07。問題なし承認。` vs human `勤怠申請確認。種別：代休申請。取得日：2026-07-16。問題なし承認。勤怠申請確認。種別：特別休暇（慶弔）。取得日：2026-07-07。問題なし承認。`

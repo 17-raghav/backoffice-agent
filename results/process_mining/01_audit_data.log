@@ -1,0 +1,19 @@
+cmd: cd process_mining/scripts && PROCMINE_DATA=<data dir> py -3.12 01_audit_data.py
+Mon Oct  5 19:08:55 IST 2026
+# Data audit
+## Summary
+| dataset | sessions | empty_sessions | events | recorded_minutes | sessions_without_browser_extension | sessions_with_harness_console_in_ocr |
+|---|---|---|---|---|---|---|
+| A | 63 | 0 | 162768 | 1537.6 | 7 | 46 |
+| B | 15 | 0 | 20477 | 176.3 | 1 | 8 |
+
+## Ground truth (A)
+- themes: {'M1': 63}
+- manifest executions: 2009; with null end_ts: 257
+- process_started/resumed immediately followed by another start of the SAME process: 257 -> the null end_ts rows are back-to-back cases, their end is the next start (recovered, not dropped)
+- injected noise blocks inside an execution: 97, between executions: 5
+
+Sessions whose GT cannot be scored as-is:
+
+
+exit 0 elapsed 28 s

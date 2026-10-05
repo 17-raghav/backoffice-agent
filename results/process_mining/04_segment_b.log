@@ -1,0 +1,19 @@
+cmd: cd process_mining/scripts && PROCMINE_DATA=<data dir> py -3.12 04_segment_b.py
+Mon Oct  5 19:10:11 IST 2026
+segments.jsonl: 704 segments in 15 sessions; tempo=0.726; l2={'row': 'cell', 'commit': 'cell', 'note': 'note'}
+case types: {'P1': 82, 'P10': 80, 'P11': 66, 'P12': 60, 'P13': 40, 'P2': 70, 'P3': 62, 'P4': 48, 'P5': 36, 'P6': 76, 'P7': 37, 'P8': 15, 'P9': 32}
+type evidence: Counter({'table_row': 633, 'cell_text': 39, 'toast': 20, 'slot': 11, 'neighbour': 1})
+  P1    {'cases': 82, 'screen': '5132|payroll-items', 'page_name': '経費精算・給与変更', 'note_head': '経費精算確認済み'}
+  P2    {'cases': 70, 'screen': '5132|leave-applications', 'page_name': '勤怠・休暇申請', 'note_head': '勤怠申請確認'}
+  P3    {'cases': 62, 'screen': '5132|onboarding', 'page_name': '入社手続き', 'note_head': '入社照合完了'}
+  P4    {'cases': 48, 'screen': '5132|payroll-items', 'page_name': '経費精算・給与変更', 'note_head': '給与変更登録'}
+  P5    {'cases': 36, 'screen': '5132|social-insurance', 'page_name': '福利厚生申請', 'note_head': '福利厚生申請処理完了'}
+  P6    {'cases': 76, 'screen': '5133|payroll-items', 'page_name': '請求書承認・経費精算', 'note_head': '請求書照合完了'}
+  P7    {'cases': 37, 'screen': '5133|onboarding', 'page_name': '支払処理', 'note_head': '支払処理確認'}
+  P8    {'cases': 15, 'screen': '5133|social-insurance', 'page_name': '予算差異分析', 'note_head': '予算差異分析完了'}
+  P9    {'cases': 32, 'screen': '5133|leave-applications', 'page_name': '経費承認（管理職）', 'note_head': '経費承認（管理職）'}
+  P10   {'cases': 80, 'screen': '5133|resident-tax', 'page_name': '発注管理', 'note_head': '発注管理処理'}
+  P11   {'cases': 66, 'screen': '5134|payroll-items', 'page_name': '在庫管理', 'note_head': '在庫調整登録'}
+  P12   {'cases': 60, 'screen': '5134|leave-applications', 'page_name': '契約管理', 'note_head': '契約管理処理'}
+  P13   {'cases': 40, 'screen': '5134|social-insurance', 'page_name': 'IT申請', 'note_head': 'IT申請処理完了'}
+exit 0 elapsed 3 s

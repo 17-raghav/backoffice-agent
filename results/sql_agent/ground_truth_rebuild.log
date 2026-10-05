@@ -1,0 +1,32 @@
+cmd: cd sql_agent && python eval/ground_truth.py  (rebuild answer key, then diff with the committed key)
+Computed ground truth for 14 questions:
+
+ 1. How many monitoring locations are in the database?
+    expected (number): 60.0
+ 2. How many daily measurements are there in total?
+    expected (number): 10959.0
+ 3. Which city has the highest average PM2.5? Give the city name.
+    expected (label): Gurugram
+ 4. Which city has the lowest average PM2.5? Give the city name.
+    expected (label): Jorapokhar
+ 5. What is the overall average PM2.5 across all cities?
+    expected (number): 64.18
+ 6. What is the average PM2.5 in Delhi?
+    expected (number): 98.94
+ 7. Which month has the highest average PM2.5 across all cities? Give the month number.
+    expected (number): 12.0
+ 8. How many cities have an average PM2.5 above 100?
+    expected (number): 1.0
+ 9. What is the highest single daily PM2.5 value recorded?
+    expected (number): 858.0
+10. What is the average PM10 across all cities?
+    expected (number): 131.99
+11. Which city has the highest average PM10? Give the city name.
+    expected (label): Delhi
+12. What is the average PM2.5 during winter months (Nov, Dec, Jan)?
+    expected (number): 116.27
+13. How many distinct parameters are measured?
+    expected (number): 2.0
+14. What is the average PM2.5 in Amritsar?
+    expected (number): 45.37
+ground_truth.json unchanged after rebuild

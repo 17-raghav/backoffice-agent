@@ -1,0 +1,45 @@
+cmd: cd sql_agent && python eval/test_sql_safety.py   (python 3.12.10 from the original project venv)
+Mon Oct  5 19:13:02 IST 2026
+Adversarial (must be BLOCKED):
+  PASS  write: DELETE
+  PASS  write: UPDATE
+  PASS  write: INSERT
+  PASS  write: REPLACE
+  PASS  ddl: DROP
+  PASS  ddl: ALTER
+  PASS  ddl: CREATE
+  PASS  ddl: TRUNCATE
+  PASS  ddl: REINDEX
+  PASS  db: ATTACH
+  PASS  db: DETACH
+  PASS  db: PRAGMA
+  PASS  db: VACUUM
+  PASS  perm: GRANT
+  PASS  perm: REVOKE
+  PASS  stack: select then drop
+  PASS  stack: select then delete
+  PASS  stack: trailing write
+  PASS  case: mixed-case delete
+  PASS  case: lower drop
+  PASS  evasion: CTE hiding DELETE
+  PASS  evasion: comment then stack
+  PASS  evasion: leading whitespace drop
+  PASS  evasion: trailing semicolon drop
+  PASS  shape: not a select (EXPLAIN)
+  PASS  shape: empty
+  PASS  shape: whitespace only
+
+Legitimate reads (must be ALLOWED):
+  PASS  read: simple count
+  PASS  read: lowercase select
+  PASS  read: join aggregate
+  PASS  read: legit CTE
+  PASS  read: classic-injection string is harmless on read
+
+Read-only driver refuses writes (backstop): PASS
+
+==================================================
+Blocked 27/27 adversarial write/injection attempts
+Overall 32/32 classification cases + driver backstop ok
+==================================================
+exit 0

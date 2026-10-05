@@ -1,0 +1,12 @@
+cmd: cd sql_agent && python eval/probe_safety_gaps.py
+Mon Oct  5 19:13:33 IST 2026
+- runaway recursive CTE (timeout defence): ERROR: query took longer than 5.0s and was aborted.  [5.00s]
+- large cross join (timeout defence): allowed, 1 data rows  [1.35s]
+- row cap: no LIMIT given: allowed, 100 data rows (truncated note)  [0.00s]
+- row cap: caller's own large LIMIT: allowed, 10959 data rows (truncated note)  [0.02s]
+- row cap: LIMIT only in a subquery: allowed, 10959 data rows (truncated note)  [0.00s]
+- false positive: forbidden word inside a string literal: ERROR: Query contains a forbidden (write/DDL) keyword; only reads are allowed.  [0.00s]
+- table-valued pragma function (schema read): allowed, 7 data rows  [0.00s]
+- load_extension call: ERROR: not authorized  [0.00s]
+- schema read via sqlite_master: allowed, 4 data rows  [0.00s]
+exit 0

@@ -1,0 +1,80 @@
+{
+ "P6": {
+  "cases": 76,
+  "screen": "5133|payroll-items",
+  "page_name": "請求書承認・経費精算",
+  "note_head": "請求書照合完了"
+ },
+ "P4": {
+  "cases": 48,
+  "screen": "5132|payroll-items",
+  "page_name": "経費精算・給与変更",
+  "note_head": "給与変更登録"
+ },
+ "P10": {
+  "cases": 80,
+  "screen": "5133|resident-tax",
+  "page_name": "発注管理",
+  "note_head": "発注管理処理"
+ },
+ "P12": {
+  "cases": 60,
+  "screen": "5134|leave-applications",
+  "page_name": "契約管理",
+  "note_head": "契約管理処理"
+ },
+ "P13": {
+  "cases": 40,
+  "screen": "5134|social-insurance",
+  "page_name": "IT申請",
+  "note_head": "IT申請処理完了"
+ },
+ "P11": {
+  "cases": 66,
+  "screen": "5134|payroll-items",
+  "page_name": "在庫管理",
+  "note_head": "在庫調整登録"
+ },
+ "P3": {
+  "cases": 62,
+  "screen": "5132|onboarding",
+  "page_name": "入社手続き",
+  "note_head": "入社照合完了"
+ },
+ "P8": {
+  "cases": 15,
+  "screen": "5133|social-insurance",
+  "page_name": "予算差異分析",
+  "note_head": "予算差異分析完了"
+ },
+ "P5": {
+  "cases": 36,
+  "screen": "5132|social-insurance",
+  "page_name": "福利厚生申請",
+  "note_head": "福利厚生申請処理完了"
+ },
+ "P7": {
+  "cases": 37,
+  "screen": "5133|onboarding",
+  "page_name": "支払処理",
+  "note_head": "支払処理確認"
+ },
+ "P1": {
+  "cases": 82,
+  "screen": "5132|payroll-items",
+  "page_name": "経費精算・給与変更",
+  "note_head": "経費精算確認済み"
+ },
+ "P2": {
+  "cases": 70,
+  "screen": "5132|leave-applications",
+  "page_name": "勤怠・休暇申請",
+  "note_head": "勤怠申請確認"
+ },
+ "P9": {
+  "cases": 32,
+  "screen": "5133|leave-applications",
+  "page_name": "経費承認（管理職）",
+  "note_head": "経費承認（管理職）"
+ }
+}

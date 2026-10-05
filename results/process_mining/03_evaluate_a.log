@@ -1,0 +1,14 @@
+cmd: cd process_mining/scripts && PROCMINE_DATA=<data dir> py -3.12 03_evaluate_a.py
+Mon Oct  5 19:09:40 IST 2026
+baseline: idle gap > 5 s           bF1@1s=0.071 @2s=0.113 @5s=0.279 segF1=0.192 (P 0.201 R 0.183) V=0.000 purity=0.087 labels=1
+baseline: idle gap > 2 s           bF1@1s=0.152 @2s=0.172 @5s=0.241 segF1=0.000 (P 0.000 R 0.000) V=0.000 purity=0.089 labels=1
+baseline: screen-slot runs         bF1@1s=0.375 @2s=0.480 @5s=0.567 segF1=0.773 (P 0.829 R 0.724) V=0.909 purity=0.962 labels=15
+procmine (full)                    bF1@1s=0.925 @2s=0.949 @5s=0.960 segF1=0.972 (P 0.969 R 0.974) V=0.956 purity=0.978 labels=15
+  subset: sessions with extension  bF1@1s=0.944 @2s=0.953 @5s=0.960 segF1=0.972 (P 0.969 R 0.975) V=0.957 purity=0.977 labels=15
+  subset: sessions without extension bF1@1s=0.733 @2s=0.909 @5s=0.963 segF1=0.972 (P 0.972 R 0.972) V=0.963 purity=0.985 labels=15
+ablation: no navigation anchor     bF1@1s=0.720 @2s=0.895 @5s=0.960 segF1=0.972 (P 0.969 R 0.974) V=0.939 purity=0.970 labels=15
+ablation: extension (L3) clicks only bF1@1s=0.900 @2s=0.908 @5s=0.915 segF1=0.928 (P 0.970 R 0.888) V=0.957 purity=0.977 labels=15
+ablation: cut idle gaps > 12 s     bF1@1s=0.852 @2s=0.890 @5s=0.903 segF1=0.892 (P 0.890 R 0.895) V=0.970 purity=0.988 labels=15
+ablation: label = screen slot only bF1@1s=0.925 @2s=0.949 @5s=0.960 segF1=0.972 (P 0.969 R 0.974) V=0.956 purity=0.978 labels=15
+ablation: no lag calibration (cut at click) bF1@1s=0.131 @2s=0.574 @5s=0.813 segF1=0.966 (P 0.963 R 0.968) V=0.859 purity=0.935 labels=15
+exit 0 elapsed 30 s

@@ -1,0 +1,22 @@
+cmd: cd sql_agent && HF_HUB_OFFLINE=1 python eval/run_routing.py   (all-MiniLM-L6-v2 from local cache)
+Mon Oct  5 19:13:02 IST 2026
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 6169.06it/s]
+Paraphrase routing:
+  OK  [0.59] 'How many stations are tracked in the dataset?' -> 'How many monitoring locations are in the database?'
+  OK  [0.76] "What's the total count of daily readings?" -> 'How many daily measurements are there in total?'
+  OK  [0.79] 'Which city is the most polluted by PM2.5?' -> 'Which city has the highest average PM2.5? Give the city name.'
+  MISS [0.74] 'Which city has the cleanest air by PM2.5?' -> 'Which city has the highest average PM2.5? Give the city name.'
+  MISS [0.67] "What's the mean PM2.5 over everything?" -> 'What is the average PM2.5 in Amritsar?'
+  OK  [0.85] 'How polluted is Delhi on average for PM2.5?' -> 'What is the average PM2.5 in Delhi?'
+  OK  [0.73] 'In which month is PM2.5 the worst?' -> 'Which month has the highest average PM2.5 across all cities? Give the month number.'
+  OK  [0.97] 'How many cities average over 100 for PM2.5?' -> 'How many cities have an average PM2.5 above 100?'
+  OK  [0.61] "What's the worst single-day PM2.5 reading?" -> 'What is the highest single daily PM2.5 value recorded?'
+  OK  [0.67] "What's the mean PM10 across the board?" -> 'What is the average PM10 across all cities?'
+  OK  [0.91] 'Which city tops the PM10 average?' -> 'Which city has the highest average PM10? Give the city name.'
+  OK  [0.84] "What's the typical PM2.5 in Nov-Jan?" -> 'What is the average PM2.5 during winter months (Nov, Dec, Jan)?'
+  MISS [0.45] 'How many different pollutants are tracked?' -> 'How many daily measurements are there in total?'
+  OK  [0.93] "What's the average PM2.5 in Amritsar city?" -> 'What is the average PM2.5 in Amritsar?'
+
+Exact reference routing:     14/14
+Paraphrased question routing: 11/14
+exit 0

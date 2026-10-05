@@ -1,0 +1,4 @@
+cmd: cd process_mining/prototype && PROCMINE_DATA=<data dir> py -3.12 extract_cases.py
+Mon Oct  5 19:10:45 IST 2026
+704 cases, 596 with list-row fields, 272 with the submitted note visible
+exit 0
