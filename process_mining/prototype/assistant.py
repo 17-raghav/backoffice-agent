@@ -1,7 +1,7 @@
 """Case-queue assistant: one small engine, per-process behaviour in definitions.json.
 
 For a case row it returns a draft: decision (approve / hold / human), the note text in the exact wording the
-team already uses, the audit-memo line, the reason, and reference checks.  It never submits anything —
+team already uses, the audit-memo line, the reason, and reference checks.  It never submits anything:
 a person confirms (or edits) and clicks the portal's own OK button.
 """
 import json

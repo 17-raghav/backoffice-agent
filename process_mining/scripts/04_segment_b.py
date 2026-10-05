@@ -2,7 +2,7 @@
 
 Labels: one label per case type.  The grouping is automatic (case-number prefix); the human-readable
 name comes from config/process_names_b.json (written once, LLM-assisted, from the on-screen page name and
-the note template workers paste — see outputs/process_catalog_b.json for the raw evidence).
+the note template workers paste; see outputs/process_catalog_b.json for the raw evidence).
 """
 import csv
 import json

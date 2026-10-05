@@ -1,4 +1,4 @@
-"""DISCLOSED CROSS-CHECK — not an input to segmentation.
+"""DISCLOSED CROSS-CHECK, not an input to segmentation.
 
 Dataset B's screen text (context.extracted_text) contains the test harness console for a few sessions:
 run ID, schedule and the ordered task IDs.  That is effectively partial ground truth leaking through the

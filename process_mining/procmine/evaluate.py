@@ -1,8 +1,8 @@
 """Scoring a segmentation of dataset A against ground truth.
 
 Ground truth is rebuilt from gt.jsonl (not gt_manifest.json): every process_started / process_resumed opens an
-execution that closes at the next boundary event.  The manifest leaves end_ts null for 257 executions — they are
-back-to-back cases of the same process (the "duplicate process_started" quirk) — so dropping them would delete
+execution that closes at the next boundary event.  The manifest leaves end_ts null for 257 executions; they are
+back-to-back cases of the same process (the "duplicate process_started" quirk), so dropping them would delete
 exactly the hardest boundaries.
 
 Metrics

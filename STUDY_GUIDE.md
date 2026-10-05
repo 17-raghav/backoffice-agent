@@ -70,7 +70,7 @@ and antonyms poorly ("cleanest" matched "highest PM2.5").
 ### Part A (`process_mining/`)
 1. `procmine/io.py` - finds `dataset_a/`, `dataset_b/` (env `PROCMINE_DATA`); merges a session's chunks
    into one time-ordered event list, de-duplicating by event id.
-2. `scripts/01_audit_data.py` - per-session counts, layers present (L3/L2), GT checks, harness console
+2. `process_mining/scripts/01_audit_data.py` - per-session counts, layers present (L3/L2), GT checks, harness console
    detection in screen text -> `data_audit.md`.
 3. `procmine/evaluate.py` - rebuilds GT executions from `gt.jsonl` (each `process_started` /
    `process_resumed` opens one, the next boundary event closes it), computes the metrics above.
@@ -84,10 +84,10 @@ and antonyms poorly ("cleanest" matched "highest PM2.5").
    with the preceding case.
 8. `procmine/pipeline.py` - glue: evidence -> cases -> identity -> type resolution -> boundaries;
    drops segments shorter than 1 s; clips to the recording.
-9. `scripts/02_calibrate_a.py` - measures the lag medians on A.
-10. `scripts/03_evaluate_a.py` - baselines, full method, subsets, ablations on A.
-11. `scripts/04_segment_b.py` - runs the same pipeline on B -> `segments.jsonl`, `cases_b.csv`.
-12. `scripts/05_analyze_b.py` - per-process tables and the handling patterns.
+9. `process_mining/scripts/02_calibrate_a.py` - measures the lag medians on A.
+10. `process_mining/scripts/03_evaluate_a.py` - baselines, full method, subsets, ablations on A.
+11. `process_mining/scripts/04_segment_b.py` - runs the same pipeline on B -> `segments.jsonl`, `cases_b.csv`.
+12. `process_mining/scripts/05_analyze_b.py` - per-process tables and the handling patterns.
 13. `prototype/extract_cases.py` -> `prototype/data/b_cases.jsonl` (rows and visible notes);
     `prototype/assistant.py` + `definitions.json` (row regex, ordered decision rules, note template,
     reference check); `prototype/replay.py` compares drafts with what workers actually submitted;
