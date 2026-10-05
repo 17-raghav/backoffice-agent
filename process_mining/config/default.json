@@ -1,0 +1,31 @@
+{
+  "_comment": "Every dataset-specific string or number lives here, not in code. Regexes key on DOM-id grammar, never on literal ids.",
+  "dom": {
+    "row_css": "#(?:(?P<pfx>[a-z]{2})-row-(?P<case_id>[A-Za-z0-9\\-]+)|(?P<pfx2>[a-z]{2})-table\\s*>\\s*tbody\\s*>\\s*tr:nth-of-type\\((?P<row>\\d+)\\))",
+    "commit_css": "#btn-(?P<pfx>[a-z]{2})-(?P<action>[a-z]+)",
+    "note_id": "^(?P<pfx>[a-z]{2})-note$",
+    "row_focus_id": "^(?P<pfx>[a-z]{2})-row-(?P<case_id>[A-Za-z0-9\\-]+)$"
+  },
+  "case_id_regex": "\\b(?P<prefix>[A-Z]{1,4}\\d{0,2})-(?P<body>\\d{6,8})-(?P<seq>\\d{3})\\b",
+  "toast_regex": "(?P<id>[A-Z]{1,4}\\d{0,2}-\\d{6,8}-\\d{3}):\\s*(?P<msg>\\S*(?:しました|完了|確定))",
+  "portal_url_regex": "https?://(?:127\\.0\\.0\\.1|localhost):(?P<port>\\d+)(?P<path>/[^#?\\s]*)?(?:#/?(?P<route>[\\w\\-]*))?",
+  "non_process_routes": ["", "dashboard", "sso-mock.html", "favicon.ico"],
+  "browser_apps": ["Google Chrome", "Microsoft Edge", "Firefox"],
+  "edit_event_types": ["keystroke", "shortcut", "clipboard_change", "text_input_complete", "browser_form_input"],
+  "lags_ms": {
+    "_source": "calibrated on dataset A ground truth by scripts/02_calibrate_a.py (medians)",
+    "nav": 1573,
+    "open_same": 3438,
+    "open_change": 5155,
+    "tail": 3275,
+    "nav_max_before_open": 6000,
+    "final_after_dashboard_nav": 8447,
+    "final_after_last_commit": 11478
+  },
+  "tempo_reference_nav_to_open_ms": 3049,
+  "min_gap_ms": 300,
+  "gap_cut_ms": 1000000000,
+  "_gap_cut_note": "Idle/noise time between cases stays with the preceding case: on A, 97/102 injected noise blocks lie inside GT executions and cutting gaps lowers segment F1 from 0.968 to 0.891.",
+  "reopen_window_ms": 60000,
+  "l2_dup_window_ms": 400
+}

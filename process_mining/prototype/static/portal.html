@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>財務会計システム — 請求書承認 (demo + assistant)</title>
+<style>
+  :root { --ink:#1f2937; --muted:#6b7280; --line:#e5e7eb; --bg:#f6f7f9; --brand:#1d4ed8; --ok:#15803d; --hold:#b45309; --warn:#b91c1c; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: "Yu Gothic UI","Meiryo",system-ui,sans-serif; color:var(--ink); background:var(--bg); }
+  header { background:#0f172a; color:#fff; padding:10px 18px; display:flex; justify-content:space-between; align-items:center; }
+  header small { color:#cbd5e1; }
+  .wrap { display:grid; grid-template-columns: 190px 1fr 380px; min-height: calc(100vh - 44px); }
+  nav { background:#fff; border-right:1px solid var(--line); padding:12px 0; }
+  nav a { display:block; padding:8px 16px; color:var(--ink); text-decoration:none; font-size:14px; }
+  nav a.active { background:#eff6ff; color:var(--brand); font-weight:600; border-left:3px solid var(--brand); }
+  main { padding:16px 20px; overflow:auto; }
+  .crumb { color:var(--muted); font-size:13px; margin-bottom:8px; }
+  h1 { font-size:18px; margin:0 0 12px; }
+  table { width:100%; border-collapse:collapse; background:#fff; font-size:13px; }
+  th, td { border-bottom:1px solid var(--line); padding:7px 8px; text-align:left; white-space:nowrap; }
+  th { background:#f9fafb; color:var(--muted); font-weight:600; }
+  tbody tr { cursor:pointer; }
+  tbody tr:hover { background:#f8fafc; }
+  tbody tr.sel { background:#eff6ff; }
+  .st-未処理 { color:var(--muted); } .st-登録済み { color:var(--ok); font-weight:600; } .st-要確認 { color:var(--hold); font-weight:600; }
+  #pi-detail-area { margin-top:14px; background:#fff; border:1px solid var(--line); padding:12px; }
+  #pi-note { width:100%; min-height:70px; font-size:14px; padding:8px; border:1px solid #cbd5e1; }
+  button { font:inherit; padding:7px 16px; border-radius:4px; border:1px solid #cbd5e1; background:#fff; cursor:pointer; }
+  #btn-pi-ok { background:var(--brand); border-color:var(--brand); color:#fff; }
+  #btn-pi-ok:disabled { opacity:.45; cursor:not-allowed; }
+  aside { background:#fff; border-left:1px solid var(--line); padding:14px 16px; overflow:auto; }
+  aside h2 { font-size:15px; margin:0 0 4px; } aside .sub { font-size:12px; color:var(--muted); margin-bottom:12px; }
+  .badge { display:inline-block; padding:3px 10px; border-radius:999px; font-weight:700; font-size:13px; }
+  .approve { background:#dcfce7; color:var(--ok); } .hold { background:#fef3c7; color:var(--hold); } .human { background:#e5e7eb; color:#374151; }
+  .kv { font-size:13px; margin:8px 0; line-height:1.5; } .kv b { display:inline-block; min-width:78px; color:var(--muted); font-weight:500; }
+  .warn { border-left:3px solid var(--warn); background:#fef2f2; padding:8px 10px; font-size:12.5px; margin:10px 0; }
+  .override { margin-top:10px; font-size:13px; } .override label { margin-right:12px; }
+  #audit { font-size:12px; border-top:1px solid var(--line); margin-top:16px; padding-top:10px; }
+  #audit div { padding:3px 0; border-bottom:1px dashed var(--line); }
+  .muted { color:var(--muted); font-size:12px; }
+  @media (max-width: 1100px) { .wrap { grid-template-columns: 1fr; } nav { display:none; } aside { border-left:none; border-top:1px solid var(--line); } }
+</style>
+</head>
+<body>
+<header><div><b>財務</b> 財務会計システム <small>2026年度 · 経理部門 (demo — rows are real cases captured in dataset B)</small></div><small id="who">user: demo-user</small></header>
+<div class="wrap">
+  <nav>
+    <a href="#">ダッシュボード</a>
+    <a class="active" href="#/payroll-items">請求書承認・経費精算</a>
+    <a href="#">経費承認（管理職）</a><a href="#">支払処理</a><a href="#">予算差異分析</a><a href="#">発注管理</a>
+  </nav>
+  <main>
+    <div class="crumb">ダッシュボード / 請求書承認・経費精算</div>
+    <h1>請求書承認・経費精算 <span class="muted" id="count"></span></h1>
+    <table id="pi-table">
+      <thead><tr><th>ID</th><th>社員ID</th><th>氏名</th><th>区分</th><th>金額</th><th>種別</th><th>ステータス</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <div id="pi-detail-area">
+      <div class="muted" id="detail-title">一覧から案件を選択してください (select a case)</div>
+      <textarea id="pi-note" placeholder="処理内容・確認コメントを入力してください…"></textarea>
+      <div style="margin-top:8px"><button id="btn-pi-ok" disabled>OK</button></div>
+    </div>
+  </main>
+  <aside>
+    <h2>アシスタント <span class="muted">(assistant — drafts only, you decide)</span></h2>
+    <div class="sub">Rules and wording come from definitions.json; nothing is submitted without your click.</div>
+    <div id="panel" class="muted">No case selected.</div>
+    <div id="audit"><b>監査ログ (audit log)</b><div class="muted">empty</div></div>
+  </aside>
+</div>
+<script src="assistant.js"></script>
+</body>
+</html>

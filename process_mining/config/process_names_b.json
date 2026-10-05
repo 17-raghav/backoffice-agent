@@ -1,0 +1,16 @@
+{
+  "_comment": "Human-readable names for the case types found automatically in dataset B. Grouping is automatic (case-number prefix); only these names were written by hand, LLM-assisted, from the on-screen page name and the note template the workers paste (outputs/process_catalog_b.json).",
+  "P1":  {"label": "expense_claim_check",        "ja": "経費精算確認",           "dept": "HR",        "screen_ja": "経費精算・給与変更"},
+  "P2":  {"label": "leave_request_approval",     "ja": "勤怠・休暇申請確認",     "dept": "HR",        "screen_ja": "勤怠・休暇申請"},
+  "P3":  {"label": "onboarding_verification",    "ja": "入社手続き照合",         "dept": "HR",        "screen_ja": "入社手続き"},
+  "P4":  {"label": "payroll_change_registration","ja": "給与変更登録",           "dept": "HR",        "screen_ja": "経費精算・給与変更"},
+  "P5":  {"label": "benefits_application",       "ja": "福利厚生申請処理",       "dept": "HR",        "screen_ja": "福利厚生申請"},
+  "P6":  {"label": "invoice_matching_approval",  "ja": "請求書照合・承認",       "dept": "Finance",   "screen_ja": "請求書承認・経費精算"},
+  "P7":  {"label": "payment_processing",         "ja": "支払処理",               "dept": "Finance",   "screen_ja": "支払処理"},
+  "P8":  {"label": "budget_variance_analysis",   "ja": "予算差異分析",           "dept": "Finance",   "screen_ja": "予算差異分析"},
+  "P9":  {"label": "manager_expense_approval",   "ja": "経費承認（管理職）",     "dept": "Finance",   "screen_ja": "経費承認（管理職）"},
+  "P10": {"label": "purchase_order_registration","ja": "発注管理（発注書登録）", "dept": "Finance",   "screen_ja": "発注管理"},
+  "P11": {"label": "inventory_adjustment",       "ja": "在庫調整登録",           "dept": "Logistics", "screen_ja": "在庫管理"},
+  "P12": {"label": "contract_management",        "ja": "契約管理",               "dept": "Logistics", "screen_ja": "契約管理"},
+  "P13": {"label": "it_request_processing",      "ja": "IT申請処理",             "dept": "Logistics", "screen_ja": "IT申請"}
+}

@@ -1,0 +1,14 @@
+# secrets
+.env
+*.pem
+*.key
+
+# data (never commit)
+sql_agent/db/
+*.db
+*.sqlite
+
+__pycache__/
+*.pyc
+.venv/
+venv/

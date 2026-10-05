@@ -1,0 +1,70 @@
+{
+  "_comment": "Per-process definitions for the case-queue assistant. One engine, one entry per process. 'row_regex' parses the list row as it appears on screen (used for replay against the logs); in the browser the same fields come from the table cells. Decision rules are ordered; first match wins; 'human' means the assistant drafts but a person decides.",
+  "P6": {
+    "name": "請求書照合・承認 (invoice matching & approval)",
+    "status": "full",
+    "screen": {"system": "財務会計システム", "route": "payroll-items", "dom_prefix": "pi"},
+    "row_regex": "^(?P<vendor_id>V\\d+) (?P<vendor>.+?) 請求書承認 (?P<invoice_no>INV-\\d{4}-\\d+) (?P<amount>[\\d,]+円) (?P<kind>定常|調整) (?P<status>\\S+)$",
+    "decision": [
+      {"if": {"field": "kind", "equals": "調整"}, "outcome": "hold", "text": "差異あり要確認", "reason": "種別=調整 (adjustment invoice) — practised rule: agrees with all 25 logged decisions (replay.py)"},
+      {"if": {"field": "kind", "equals": "定常"}, "outcome": "approve", "text": "差異なし承認", "reason": "種別=定常 (regular invoice) — practised rule: agrees with all 25 logged decisions (replay.py)"},
+      {"if": {"always": true}, "outcome": "human", "text": "", "reason": "unknown invoice kind"}
+    ],
+    "reference_check": {
+      "doc": "月次定額取引先一覧 (getsujitsu_teigaku_torihikisaki_ichiran)",
+      "fixed_monthly": {"株式会社山田製作所": 385000, "大和商事株式会社": 1240000, "東京電子工業株式会社": 562800, "グローバルテック合同会社": 745000, "北陸電子部品": 420000},
+      "tolerance": 0.10
+    },
+    "note_template": "請求書照合完了。{invoice_no} 金額：{amount}。{decision_text}。",
+    "memo_template": "{case_no}\t{vendor}\t{invoice_no}\t{amount}\t{decision_text}"
+  },
+  "P1": {
+    "name": "経費精算確認 (expense claim check)",
+    "status": "draft-only",
+    "screen": {"system": "HR人事給与システム", "route": "payroll-items", "dom_prefix": "pi"},
+    "row_regex": "^(?P<emp_id>E\\d+) (?P<name>\\S+ \\S+) (?P<category>\\S+) (?P<amount>[\\d,]+円) (?P<kind>定常|調整) (?P<status>\\S+)$",
+    "decision": [{"if": {"always": true}, "outcome": "human", "text": "規程内であることを確認した", "reason": "policy limits per category not yet confirmed; every logged case was approved, so the rejection branch is unobserved"}],
+    "note_template": "経費精算確認済み。費目：{category} 金額：{amount}。{decision_text}。"
+  },
+  "P2": {
+    "name": "勤怠・休暇申請確認 (leave request approval)",
+    "status": "draft-only",
+    "screen": {"system": "HR人事給与システム", "route": "leave-applications", "dom_prefix": "la"},
+    "row_regex": "^(?P<emp_id>E\\d+) (?P<name>\\S+ \\S+) (?P<leave_type>\\S+) (?P<date>\\d{4}-\\d{2}-\\d{2}) (?P<dept>\\S+) (?P<status>\\S+)$",
+    "decision": [{"if": {"always": true}, "outcome": "human", "text": "問題なし承認", "reason": "entitlement balance not visible in the list"}],
+    "note_template": "勤怠申請確認。種別：{leave_type}。取得日：{date}。{decision_text}。"
+  },
+  "P8": {
+    "name": "予算差異分析 (budget variance analysis)",
+    "status": "draft-only",
+    "screen": {"system": "財務会計システム", "route": "social-insurance", "dom_prefix": "si"},
+    "row_regex": "^(?P<dept_id>D\\d+) (?P<dept>\\S+) 予算差異分析 (?P<month>\\d{4}-\\d{2}) (?P<detail>予算 [\\d,]+ / 実績 [\\d,]+ \\(差異 [+\\-][\\d.]+%\\)) (?P<status>\\S+)$",
+    "decision": [{"if": {"always": true}, "outcome": "human", "text": "是正対応方針を記録", "reason": "corrective action is a judgement"}],
+    "note_template": "予算差異分析完了。{dept} {detail}。{decision_text}。"
+  },
+  "P12": {
+    "name": "契約管理 (contract management)",
+    "status": "draft-only",
+    "screen": {"system": "受発注在庫管理システム", "route": "leave-applications", "dom_prefix": "la"},
+    "row_regex": "^(?P<vendor_id>V\\d+) (?P<vendor>.+?) (?P<contract>\\S+ \\(\\S+\\)) (?P<date>\\d{4}-\\d{2}-\\d{2}) (?P<action>\\S+) (?P<status>\\S+)$",
+    "decision": [{"if": {"always": true}, "outcome": "human", "text": "関連書類確認済み", "reason": "document review content is not observable in the logs"}],
+    "note_template": "契約管理処理。種別：{contract}。期日：{date}。{decision_text}。"
+  },
+  "P13": {
+    "name": "IT申請処理 (IT request processing)",
+    "status": "draft-only",
+    "screen": {"system": "受発注在庫管理システム", "route": "social-insurance", "dom_prefix": "si"},
+    "row_regex": "^(?P<emp_id>E\\d+) (?P<name>\\S+ \\S+) (?P<req_type>\\S+) (?P<month>\\d{4}-\\d{2}) 申請者：(?P<dept>\\S+) 優先度：(?P<priority>\\S+) 承認者：(?P<approver>\\S+) (?P<status>\\S+)$",
+    "decision": [{"if": {"always": true}, "outcome": "human", "text": "情報システム部へ転送済み", "reason": "routing only"}],
+    "note_template": "IT申請処理完了。申請種別：{req_type}。申請者：{name}。{decision_text}。"
+  },
+  "_deferred": {
+    "P3": "入社手続き照合 — note needs 採用区分 from the detail panel / checklist doc",
+    "P4": "給与変更登録 — note needs 適用日 from the detail panel",
+    "P5": "福利厚生申請処理 — note needs 対象 from the detail panel",
+    "P7": "支払処理 — money movement; process steps depend on payment type; keep manual until controls are designed",
+    "P9": "経費承認（管理職） — approval authority belongs to a manager; amount not in the list row",
+    "P10": "発注管理 — note needs order type/item/quantity from the detail panel",
+    "P11": "在庫調整登録 — adjustment quantity not in the list row"
+  }
+}

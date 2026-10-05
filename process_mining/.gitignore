@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+# raw data is distributed separately
+/data/
+../data/
+# generated from the dataset (contain session ids / case rows); aggregate copies live in ../results/
+outputs/
+segments.jsonl
+prototype/data/
