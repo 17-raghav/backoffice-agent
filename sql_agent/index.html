@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Air Quality Analytics Agent</title>
+  <style>
+    :root { --bg:#0f1419; --panel:#1a2129; --accent:#4ea1d3; --text:#e6edf3; --muted:#8b949e; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: system-ui, -apple-system, sans-serif;
+      background: var(--bg); color: var(--text);
+      display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+    }
+    header { text-align: center; padding: 32px 16px 8px; }
+    h1 { margin: 0 0 4px; font-size: 1.5rem; }
+    .sub { color: var(--muted); font-size: 0.9rem; }
+    main { width: 100%; max-width: 680px; padding: 16px; }
+    .ask-row { display: flex; gap: 8px; margin-bottom: 8px; }
+    input {
+      flex: 1; padding: 12px 14px; border-radius: 8px; border: 1px solid #30363d;
+      background: var(--panel); color: var(--text); font-size: 1rem;
+    }
+    button {
+      padding: 12px 18px; border: none; border-radius: 8px; cursor: pointer;
+      background: var(--accent); color: #06121b; font-weight: 600; font-size: 1rem;
+    }
+    button:disabled { opacity: 0.5; cursor: default; }
+    .examples { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+    .examples button {
+      background: transparent; color: var(--accent); border: 1px solid #30363d;
+      font-size: 0.8rem; padding: 6px 10px; font-weight: 400;
+    }
+    .qa { background: var(--panel); border-radius: 10px; padding: 16px; margin-bottom: 12px; }
+    .qa .q { font-weight: 600; margin-bottom: 6px; }
+    .qa .a { color: var(--text); white-space: pre-wrap; }
+    .qa .a.loading { color: var(--muted); font-style: italic; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Air Quality Analytics Agent</h1>
+    <div class="sub">Ask about air pollution across India — answered from live sensor data.</div>
+  </header>
+  <main>
+    <div class="ask-row">
+      <input id="q" type="text" placeholder="e.g. Which city has the worst PM2.5?"
+             autocomplete="off" />
+      <button id="askBtn">Ask</button>
+    </div>
+    <div class="examples" id="examples"></div>
+    <div id="answers"></div>
+  </main>
+
+  <script>
+    const API = "http://127.0.0.1:8000/ask";
+    const input = document.getElementById("q");
+    const askBtn = document.getElementById("askBtn");
+    const answers = document.getElementById("answers");
+
+    const examples = [
+      "Which city has the highest average PM2.5?",
+      "What is the average PM2.5 in Delhi?",
+      "Which month has the worst air quality?",
+      "How many cities have average PM2.5 above 100?",
+    ];
+    const exDiv = document.getElementById("examples");
+    examples.forEach(text => {
+      const b = document.createElement("button");
+      b.textContent = text;
+      b.onclick = () => { input.value = text; ask(); };
+      exDiv.appendChild(b);
+    });
+
+    async function ask() {
+      const question = input.value.trim();
+      if (!question) return;
+      askBtn.disabled = true;
+
+      const card = document.createElement("div");
+      card.className = "qa";
+      card.innerHTML = `<div class="q"></div><div class="a loading">Thinking…</div>`;
+      card.querySelector(".q").textContent = question;
+      answers.prepend(card);
+      const aEl = card.querySelector(".a");
+
+      try {
+        const res = await fetch(API, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ question }),
+        });
+        if (!res.ok) {
+          const err = await res.json().catch(() => ({}));
+          throw new Error(err.detail || `HTTP ${res.status}`);
+        }
+        const data = await res.json();
+        aEl.classList.remove("loading");
+        aEl.textContent = data.answer;
+      } catch (e) {
+        aEl.classList.remove("loading");
+        aEl.textContent = "Error: " + e.message;
+      } finally {
+        askBtn.disabled = false;
+        input.value = "";
+        input.focus();
+      }
+    }
+
+    askBtn.onclick = ask;
+    input.addEventListener("keydown", e => { if (e.key === "Enter") ask(); });
+  </script>
+</body>
+</html>

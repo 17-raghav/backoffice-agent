@@ -1,0 +1,86 @@
+[
+  {
+    "q": "How many monitoring locations are in the database?",
+    "sql": "SELECT COUNT(*) FROM locations",
+    "check": "number",
+    "answer": 60.0
+  },
+  {
+    "q": "How many daily measurements are there in total?",
+    "sql": "SELECT COUNT(*) FROM measurements",
+    "check": "number",
+    "answer": 10959.0
+  },
+  {
+    "q": "Which city has the highest average PM2.5? Give the city name.",
+    "sql": "SELECT l.city FROM measurements m JOIN sensors s ON m.sensor_id=s.sensor_id JOIN locations l ON s.location_id=l.location_id WHERE s.parameter='pm25' GROUP BY l.city ORDER BY AVG(m.value) DESC LIMIT 1",
+    "check": "label",
+    "answer": "Gurugram"
+  },
+  {
+    "q": "Which city has the lowest average PM2.5? Give the city name.",
+    "sql": "SELECT l.city FROM measurements m JOIN sensors s ON m.sensor_id=s.sensor_id JOIN locations l ON s.location_id=l.location_id WHERE s.parameter='pm25' GROUP BY l.city ORDER BY AVG(m.value) ASC LIMIT 1",
+    "check": "label",
+    "answer": "Jorapokhar"
+  },
+  {
+    "q": "What is the overall average PM2.5 across all cities?",
+    "sql": "SELECT AVG(m.value) FROM measurements m JOIN sensors s ON m.sensor_id=s.sensor_id WHERE s.parameter='pm25'",
+    "check": "number",
+    "answer": 64.18
+  },
+  {
+    "q": "What is the average PM2.5 in Delhi?",
+    "sql": "SELECT AVG(m.value) FROM measurements m JOIN sensors s ON m.sensor_id=s.sensor_id JOIN locations l ON s.location_id=l.location_id WHERE s.parameter='pm25' AND l.city='Delhi'",
+    "check": "number",
+    "answer": 98.94
+  },
+  {
+    "q": "Which month has the highest average PM2.5 across all cities? Give the month number.",
+    "sql": "SELECT CAST(strftime('%m', m.date) AS INTEGER) mo FROM measurements m JOIN sensors s ON m.sensor_id=s.sensor_id WHERE s.parameter='pm25' GROUP BY mo ORDER BY AVG(m.value) DESC LIMIT 1",
+    "check": "number",
+    "answer": 12.0
+  },
+  {
+    "q": "How many cities have an average PM2.5 above 100?",
+    "sql": "SELECT COUNT(*) FROM (SELECT l.city FROM measurements m JOIN sensors s ON m.sensor_id=s.sensor_id JOIN locations l ON s.location_id=l.location_id WHERE s.parameter='pm25' GROUP BY l.city HAVING AVG(m.value) > 100)",
+    "check": "number",
+    "answer": 1.0
+  },
+  {
+    "q": "What is the highest single daily PM2.5 value recorded?",
+    "sql": "SELECT MAX(m.value) FROM measurements m JOIN sensors s ON m.sensor_id=s.sensor_id WHERE s.parameter='pm25'",
+    "check": "number",
+    "answer": 858.0
+  },
+  {
+    "q": "What is the average PM10 across all cities?",
+    "sql": "SELECT AVG(m.value) FROM measurements m JOIN sensors s ON m.sensor_id=s.sensor_id WHERE s.parameter='pm10'",
+    "check": "number",
+    "answer": 131.99
+  },
+  {
+    "q": "Which city has the highest average PM10? Give the city name.",
+    "sql": "SELECT l.city FROM measurements m JOIN sensors s ON m.sensor_id=s.sensor_id JOIN locations l ON s.location_id=l.location_id WHERE s.parameter='pm10' GROUP BY l.city ORDER BY AVG(m.value) DESC LIMIT 1",
+    "check": "label",
+    "answer": "Delhi"
+  },
+  {
+    "q": "What is the average PM2.5 during winter months (Nov, Dec, Jan)?",
+    "sql": "SELECT AVG(m.value) FROM measurements m JOIN sensors s ON m.sensor_id=s.sensor_id WHERE s.parameter='pm25' AND CAST(strftime('%m', m.date) AS INTEGER) IN (11,12,1)",
+    "check": "number",
+    "answer": 116.27
+  },
+  {
+    "q": "How many distinct parameters are measured?",
+    "sql": "SELECT COUNT(DISTINCT parameter) FROM sensors",
+    "check": "number",
+    "answer": 2.0
+  },
+  {
+    "q": "What is the average PM2.5 in Amritsar?",
+    "sql": "SELECT AVG(m.value) FROM measurements m JOIN sensors s ON m.sensor_id=s.sensor_id JOIN locations l ON s.location_id=l.location_id WHERE s.parameter='pm25' AND l.city='Amritsar'",
+    "check": "number",
+    "answer": 45.37
+  }
+]

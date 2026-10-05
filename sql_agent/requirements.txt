@@ -1,0 +1,9 @@
+requests
+python-dotenv
+langchain>=1.0
+langchain-groq
+langgraph
+fastapi
+uvicorn
+sentence-transformers
+numpy
